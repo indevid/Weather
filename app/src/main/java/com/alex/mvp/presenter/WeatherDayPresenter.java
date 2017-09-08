@@ -14,6 +14,8 @@ import com.arellomobile.mvp.MvpPresenter;
 
 import java.util.List;
 
+import retrofit2.Call;
+
 /**
  * Created by Alex on 08.09.2017.
  */
@@ -22,9 +24,11 @@ public class WeatherDayPresenter  extends MvpPresenter<WeatherDayView> {
 
     private final String TAG = "test WeatherDayPr";
 
+    private Call call;
+
     public void forecastHourly(Location location) {
         getViewState().showProgressDialog();
-        Request.getInstance().forecastHourly(location, new CallbackObject.CallbackGetObject() {
+         call = Request.getInstance().forecastHourly(location, new CallbackObject.CallbackGetObject<AnswerForecastHourly>() {
             @Override
             public void onFailure() {
                 Log.d(TAG, "onFailure");
@@ -40,10 +44,9 @@ public class WeatherDayPresenter  extends MvpPresenter<WeatherDayView> {
             }
 
             @Override
-            public void onSuccess(Object o) {
+            public void onSuccess(AnswerForecastHourly answerForecastHourly) {
                 Log.d(TAG, "onSuccess");
                 getViewState().dismissProgressDialog();
-                AnswerForecastHourly answerForecastHourly = (AnswerForecastHourly) o;
                 List<HourlyForecast> hourlyForecastList = answerForecastHourly.getHourlyForecast();
                 while (hourlyForecastList.size()> 24){
                     hourlyForecastList.remove(hourlyForecastList.size()-1);
@@ -53,5 +56,11 @@ public class WeatherDayPresenter  extends MvpPresenter<WeatherDayView> {
         });
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(call.isExecuted()){
+            call.cancel();
+        }
+    }
 }

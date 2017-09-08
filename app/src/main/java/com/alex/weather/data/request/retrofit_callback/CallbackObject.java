@@ -15,10 +15,10 @@ public class CallbackObject<T> implements Callback<T> {
         this.callbackGetObject = callbackGetObject;
     }
 
-    public interface CallbackGetObject {
+    public interface CallbackGetObject<T> {
         void onFailure();
         void onFailureConnection();
-        void onSuccess(Object o);
+        void onSuccess(T t);
     }
 
     @Override

@@ -24,17 +24,21 @@ public class Request {
 
     private String TAG = "test Request";
 
-    public void forecast10day(Location location, CallbackObject.CallbackGetObject callbackGetObject) {
+    public Call forecast10day(Location location, CallbackObject.CallbackGetObject callbackGetObject) {
         Log.d(TAG, "forecast10day");
         String lat_lon = location.getLatitude()+","+location.getLongitude();
         Call<AnswerForecast10day> call = RequestFactory.getRequestWunderground().forecast10day(lat_lon);
         call.enqueue(new CallbackObject<AnswerForecast10day>(callbackGetObject));
+        return call;
     }
 
-    public void forecastHourly(Location location, CallbackObject.CallbackGetObject callbackGetObject) {
+    public Call forecastHourly(Location location, CallbackObject.CallbackGetObject callbackGetObject) {
         Log.d(TAG, "forecastHourly");
         String lat_lon = location.getLatitude()+","+location.getLongitude();
         Call<AnswerForecastHourly> call = RequestFactory.getRequestWunderground().forecastHourly(lat_lon);
         call.enqueue(new CallbackObject<AnswerForecastHourly>(callbackGetObject));
+        return call;
     }
+
+
 }

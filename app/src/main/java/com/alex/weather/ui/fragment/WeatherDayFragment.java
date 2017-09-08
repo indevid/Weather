@@ -65,7 +65,6 @@ public class WeatherDayFragment extends MvpAppCompatFragment implements WeatherD
         View view = inflater.inflate(R.layout.fragment_weather_day, container, false);
         ButterKnife.bind(this, view);
         helperProgressDialog = new HelperProgressDialog(getActivity());
-        Log.e(TAG, "onCreateView: -----------------");
         weatherDayPresenter.forecastHourly(location);
         return view;
     }
