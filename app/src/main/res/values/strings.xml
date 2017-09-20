@@ -18,7 +18,8 @@
     <string name="weather_hourly_time">%1$s:%2$s</string>
 
     <string name="error_permission">Нет разрешения на геолокацию</string>
-    <string name="error_location">Ошибка при поиске местоположения</string>
+    <string name="error_location">Ошибка при поиске последнего местоположения</string>
+    <string name="error_location2">Ошибка при поиске местоположения</string>
     <string name="error_place_selected">Ошибка при выборе города</string>
     <string name="failure">Ошибка сервера</string>
     <string name="failure_connection">Ошибка соединения</string>
